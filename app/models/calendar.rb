@@ -24,6 +24,10 @@ class Calendar < ActiveRecord::Base
     cell_header_height = 20
     page_size = "A3"
 
+    subtitle_box_width = cell_width - 4
+    subtitle_box_height = 15
+
+
     pdf = Prawn::Document.new(page_size: page_size, page_layout: :portrait)
     pdf.font "#{Prawn::DATADIR}/fonts/DejaVuSans.ttf"
     page_width = pdf.bounds.width
@@ -57,6 +61,18 @@ class Calendar < ActiveRecord::Base
       people.each do |person|
         if person.day.day == date.day and person.day.month == date.month
           pdf.image person.photo, at: [x1 + 2, y1 - cell_header_height - 2], fit: [cell_width-4, cell_height-cell_header_height - 4]
+          pdf.transparent(0.5) do
+            pdf.fill_rectangle [x1 + 2, y1 - cell_height + 15], subtitle_box_width, subtitle_box_height
+          end
+          pdf.fill_color "ffffff"
+          pdf.text_box person.name || "",
+            at: [x1 + 2, y1 - cell_height + 15],
+            width: subtitle_box_width,
+            height: subtitle_box_height,
+            align: :center,
+            valign: :center,
+            size: 10
+          pdf.fill_color "000000"
         end
       end
       if date.tomorrow.day == 1 and not date.tomorrow.january?
