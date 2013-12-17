@@ -6,7 +6,7 @@ class Calendar < ActiveRecord::Base
     separator = "-"
     people.delete_all
     Dir.glob("public/uploads/#{id}/*").each do |filename|
-      if [".jpg", ".png"].include? File.extname(filename)
+      if [".jpg", ".png"].include? File.extname(filename).downcase
         parts = File.basename(filename, ".*").split separator
         if parts.size >=2
           people.create name: parts[2..-1].join(separator),
