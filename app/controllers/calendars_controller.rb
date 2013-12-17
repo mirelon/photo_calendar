@@ -10,7 +10,7 @@ class CalendarsController < ApplicationController
     cell_height = 80
     page_size = "A3"
 
-  	@people = Calendar.find(params[:id]).people
+  	@people = Calendar.find(params[:id]).load_people
     @year = (params[:year] || Date.current.year + 1).to_i
     pdf = Prawn::Document.new(page_size: page_size, page_layout: :portrait)
     pdf.font "#{Prawn::DATADIR}/fonts/DejaVuSans.ttf"
