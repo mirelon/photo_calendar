@@ -7,7 +7,7 @@ gem 'rails', '3.2.13'
 
 gem 'sqlite3'
 gem 'haml'
-gem 'prawn'
+gem 'prawn', git: "https://github.com/prawnpdf/prawn"
 gem 'week_of_month', git: "https://github.com/sachin87/week-of-month"
 
 

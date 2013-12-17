@@ -13,6 +13,7 @@ class CalendarsController < ApplicationController
   	@people = Calendar.find(params[:id]).people
     @year = (params[:year] || Date.current.year + 1).to_i
     pdf = Prawn::Document.new(page_size: page_size, page_layout: :portrait)
+    pdf.font "#{Prawn::DATADIR}/fonts/DejaVuSans.ttf"
     page_width = pdf.bounds.width
     page_height = pdf.bounds.height
     start_date = Date.new(@year)
@@ -33,7 +34,10 @@ class CalendarsController < ApplicationController
       pdf.stroke
       pdf.rectangle [x1, y1], cell_width, 20
       pdf.stroke
-      pdf.draw_text date.day.to_s, at: [x1 + 7, y1 - 15], style: :bold
+      pdf.font "Helvetica" do
+        pdf.draw_text date.day.to_s, at: [x1 + 7, y1 - 15], style: :bold
+      end
+      pdf.draw_text PhotoCalendar::Application.config.namesday[date.month][date.day], at: [x1 + 22, y1 - 15], size: 7
       @people.each do |person|
         if person.day.day == date.day and person.day.month == date.month
           pdf.image person.photo, at: [x1 + 10, y1 - 30], fit: [cell_width-50, cell_height-40]

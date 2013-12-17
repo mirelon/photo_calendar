@@ -1,4 +1,14 @@
 GIT
+  remote: https://github.com/prawnpdf/prawn
+  revision: 975046ee6adfabfc16188abdef4b5a21a9423ce9
+  specs:
+    prawn (0.14.0)
+      afm
+      pdf-reader (~> 1.2)
+      ruby-rc4
+      ttfunk (~> 1.0.3)
+
+GIT
   remote: https://github.com/sachin87/week-of-month
   revision: 7b798277a1993241e86af887d26c95344a1eedc6
   specs:
@@ -69,11 +79,6 @@ GEM
       ruby-rc4
       ttfunk
     polyglot (0.3.3)
-    prawn (0.13.0)
-      afm
-      pdf-reader (~> 1.2)
-      ruby-rc4
-      ttfunk (~> 1.0.3)
     rack (1.4.5)
     rack-cache (1.2)
       rack (>= 0.4)
@@ -129,7 +134,7 @@ DEPENDENCIES
   coffee-rails (~> 3.2.1)
   haml
   jquery-rails
-  prawn
+  prawn!
   rails (= 3.2.13)
   sass-rails (~> 3.2.3)
   sqlite3
