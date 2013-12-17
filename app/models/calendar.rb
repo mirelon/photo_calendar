@@ -21,6 +21,7 @@ class Calendar < ActiveRecord::Base
   def render(year)
     cell_width = 100
     cell_height = 80
+    cell_header_height = 20
     page_size = "A3"
 
     pdf = Prawn::Document.new(page_size: page_size, page_layout: :portrait)
@@ -43,15 +44,15 @@ class Calendar < ActiveRecord::Base
       y1 = 500 - date.all_sundays_in_month.select{|i| i<date.day}.size * cell_height
       pdf.rectangle [x1, y1], cell_width, cell_height
       pdf.stroke
-      pdf.rectangle [x1, y1], cell_width, 20
+      pdf.rectangle [x1, y1], cell_width, cell_header_height
       pdf.stroke
       pdf.font "Helvetica" do
-        pdf.draw_text date.day.to_s, at: [x1 + 7, y1 - 15], style: :bold
+        pdf.draw_text date.day.to_s, at: [x1 + 5, y1 - cell_header_height + 5], style: :bold
       end
-      pdf.draw_text PhotoCalendar::Application.config.namesday[date.month][date.day], at: [x1 + 22, y1 - 15], size: 7
+      pdf.draw_text PhotoCalendar::Application.config.namesday[date.month][date.day], at: [x1 + 22, y1 - cell_header_height + 5], size: 7
       people.each do |person|
         if person.day.day == date.day and person.day.month == date.month
-          pdf.image person.photo, at: [x1 + 2, y1 - 22], fit: [cell_width-4, cell_height-24]
+          pdf.image person.photo, at: [x1 + 2, y1 - cell_header_height - 2], fit: [cell_width-4, cell_height-cell_header_height - 4]
         end
       end
       if date.tomorrow.day == 1 and not date.tomorrow.january?
