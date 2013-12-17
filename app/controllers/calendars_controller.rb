@@ -28,7 +28,7 @@ class CalendarsController < ApplicationController
       pdf.stroke
       pdf.draw_text date.day.to_s, at: [x1 + 7, y1 - 15], style: :bold
       @people.each do |person|
-        if person.day == date
+        if person.day.day == date.day and person.day.month == date.month
           pdf.image person.photo, at: [x1 + 10, y1 - 30], fit: [width-50, height-40]
         end
       end
