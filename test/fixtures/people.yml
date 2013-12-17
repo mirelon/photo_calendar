@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: MyString
+  day: 2013-12-16
+  photo: MyString
+  calendar_id: 1
+
+two:
+  name: MyString
+  day: 2013-12-16
+  photo: MyString
+  calendar_id: 1
