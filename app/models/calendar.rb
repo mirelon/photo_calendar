@@ -49,7 +49,11 @@ class Calendar < ActiveRecord::Base
       pdf.font "Helvetica" do
         pdf.draw_text date.day.to_s, at: [x1 + 5, y1 - cell_header_height + 5], style: :bold
       end
-      pdf.draw_text PhotoCalendar::Application.config.namesday[date.month][date.day], at: [x1 + 22, y1 - cell_header_height + 5], size: 7
+      pdf.text_box PhotoCalendar::Application.config.namesday[date.month][date.day] || "",
+        at: [x1 + 15, y1 - 8],
+        width: cell_width - 15,
+        align: :center,
+        size: 7
       people.each do |person|
         if person.day.day == date.day and person.day.month == date.month
           pdf.image person.photo, at: [x1 + 2, y1 - cell_header_height - 2], fit: [cell_width-4, cell_height-cell_header_height - 4]
