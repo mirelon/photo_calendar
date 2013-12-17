@@ -10,7 +10,7 @@ class CalendarsController < ApplicationController
     height = 80
   	@people = Calendar.find(params[:id]).people
     @year = (params[:year] || Date.current.year + 1).to_i
-    pdf = Prawn::Document.new(page_layout: :landscape)
+    pdf = Prawn::Document.new(page_size: "A3", page_layout: :portrait)
     start_date = Date.new(@year)
     end_date = start_date.end_of_year
     (start_date .. end_date).each do |date|
