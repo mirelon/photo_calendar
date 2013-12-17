@@ -25,7 +25,7 @@ class CalendarsController < ApplicationController
       pdf.draw_text date.day.to_s, at: [x1 + 20, y1 - 20]
       @people.each do |person|
         if person.day == date
-          pdf.image person.photo, at: [x1 + 20, y1 - 30], width: width-50, height: height-40
+          pdf.image person.photo, at: [x1 + 20, y1 - 30], fit: [width-50, height-40]
         end
       end
       if date.tomorrow.day == 1 and not date.tomorrow.january?
