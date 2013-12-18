@@ -38,11 +38,13 @@ class Calendar < ActiveRecord::Base
     end_date = start_date.end_of_year
     (start_date .. end_date).each do |date|
       if date.day == 1
-        pdf.fill_color "0000ff"
+        pdf.image "public/uploads/#{id}/1001.jpg",
+          at: [-pdf.page.margins[:left], page_height+pdf.page.margins[:top]+100],
+          width: page_width+pdf.page.margins[:left]+pdf.page.margins[:right]
+        pdf.fill_color "cc0000"
         pdf.text_box I18n.t('date.month_names', locale: :sk)[date.month],
           at: [0, 570],
           width: 2*cell_width,
-          fill_color: "0000ff",
           size: 36
         (0..6).each do |weekday|
           if weekday==6
@@ -97,13 +99,13 @@ class Calendar < ActiveRecord::Base
           found_people << person.name
           if found_people.size == 1
             pdf.image person.photo,
-                at: [x1, y1 - cell_header_height],
-                fit: [cell_width, cell_height-cell_header_height]
+                at: [x1+1, y1 - cell_header_height-1],
+                fit: [cell_width, cell_height-cell_header_height-2]
           else
-            pdf.bounding_box([x1, y1 - cell_header_height], width: cell_width, height: cell_height-cell_header_height) do
+            pdf.bounding_box([x1+1, y1 - cell_header_height-1], width: cell_width-1, height: cell_height-cell_header_height-1) do
               pdf.image person.photo,
                 position: :right,
-                fit: [cell_width, cell_height-cell_header_height]
+                fit: [cell_width, cell_height-cell_header_height-2]
             end
           end
         end
