@@ -19,21 +19,20 @@ class Calendar < ActiveRecord::Base
   end
 
   def render(year)
-    cell_width = 100
-    cell_height = 80
-    cell_header_height = 20
     page_size = "A3"
-
-    subtitle_box_width = cell_width
-    subtitle_box_height = 15
-
-
     pdf = Prawn::Document.new page_size: page_size,
       page_layout: :portrait,
       background: "public/uploads/#{id}/background.jpg"
     pdf.font "#{Prawn::DATADIR}/fonts/DejaVuSans.ttf"
+
     page_width = pdf.bounds.width
     page_height = pdf.bounds.height
+    cell_width = pdf.bounds.width / 7
+    cell_height = 80
+    cell_header_height = 20
+    subtitle_box_width = cell_width
+    subtitle_box_height = 15
+    
     start_date = Date.new(year)
     end_date = start_date.end_of_year
     (start_date .. end_date).each do |date|
