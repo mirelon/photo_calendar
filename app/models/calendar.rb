@@ -85,26 +85,53 @@ class Calendar < ActiveRecord::Base
         valign: :center,
         align: :center,
         size: 9
+
+      # Find birthdays  
+
       pdf.fill_color "000000"
+      found_people = []
       people.each do |person|
         if person.day.day == date.day and person.day.month == date.month
-          pdf.image person.photo,
-            at: [x1, y1 - cell_header_height],
-            fit: [cell_width, cell_height-cell_header_height]
-          pdf.transparent(0.5) do
-            pdf.fill_rectangle [x1, y1 - cell_height + 15], subtitle_box_width, subtitle_box_height
+          found_people << person.name
+          if found_people.size == 1
+            pdf.image person.photo,
+                at: [x1, y1 - cell_header_height],
+                fit: [cell_width, cell_height-cell_header_height]
+          else
+            pdf.bounding_box([x1, y1 - cell_header_height], width: cell_width, height: cell_height-cell_header_height) do
+              pdf.image person.photo,
+                position: :right,
+                fit: [cell_width, cell_height-cell_header_height]
+            end
           end
-          pdf.fill_color "ffffff"
-          pdf.text_box person.name || "",
-            at: [x1 + 2, y1 - cell_height + 15],
-            width: subtitle_box_width,
-            height: subtitle_box_height,
-            align: :center,
-            valign: :center,
-            size: 10
-          pdf.fill_color "000000"
         end
       end
+      if found_people.size >= 1
+        pdf.transparent(0.5) do
+          pdf.fill_rectangle [x1, y1 - cell_height + 15], subtitle_box_width, subtitle_box_height
+        end
+        
+        pdf.fill_color "ffffff"
+        pdf.text_box found_people[0] || "",
+          at: [x1 + 2, y1 - cell_height + 15],
+          width: subtitle_box_width,
+          height: subtitle_box_height,
+          align: :left,
+          valign: :center,
+          size: 10
+        if found_people.size == 2
+          pdf.text_box found_people[1] || "",
+            at: [x1 + 2, y1 - cell_height + 15],
+            width: subtitle_box_width - 4,
+            height: subtitle_box_height,
+            align: :right,
+            valign: :center,
+            size: 10
+        end
+        pdf.fill_color "000000"
+      end
+
+
       if date.tomorrow.day == 1 and not date.tomorrow.january?
         pdf.start_new_page
       end
