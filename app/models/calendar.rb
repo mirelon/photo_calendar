@@ -50,6 +50,9 @@ class Calendar < ActiveRecord::Base
       pdf.stroke
       pdf.rectangle [x1, y1], cell_width, cell_header_height
       pdf.stroke
+      if date.sunday?
+        pdf.fill_color "cc0000"
+      end
       pdf.font "Helvetica" do
         pdf.draw_text date.day.to_s, at: [x1 + 5, y1 - cell_header_height + 5], style: :bold
       end
@@ -58,6 +61,7 @@ class Calendar < ActiveRecord::Base
         width: cell_width - 15,
         align: :center,
         size: 7
+      pdf.fill_color "000000"
       people.each do |person|
         if person.day.day == date.day and person.day.month == date.month
           pdf.image person.photo, at: [x1 + 2, y1 - cell_header_height - 2], fit: [cell_width-4, cell_height-cell_header_height - 4]
