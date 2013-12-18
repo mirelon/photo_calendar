@@ -365,12 +365,15 @@ PhotoCalendar::Application.config.namesday[12][30]="Dávid"
 PhotoCalendar::Application.config.namesday[12][31]="Silvester"
 
 PhotoCalendar::Application.config.namesday[1][1]="Nový rok"
+PhotoCalendar::Application.config.namesday[5][1]="Sviatok práce"
 PhotoCalendar::Application.config.namesday[7][5]="Cyril a Metod"
 PhotoCalendar::Application.config.namesday[8][29]="Výročie SNP"
 PhotoCalendar::Application.config.namesday[9][1]="Deň Ústavy SR"
 
 PhotoCalendar::Application.config.holidays = Array.new(13){[]}
 PhotoCalendar::Application.config.holidays[1][1]=true
+PhotoCalendar::Application.config.holidays[5][1]=true
+PhotoCalendar::Application.config.holidays[5][8]=true
 PhotoCalendar::Application.config.holidays[7][5]=true
 PhotoCalendar::Application.config.holidays[8][29]=true
 PhotoCalendar::Application.config.holidays[9][1]=true

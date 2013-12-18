@@ -67,7 +67,7 @@ class Calendar < ActiveRecord::Base
       pdf.stroke
       pdf.fill_color "ddddff"
       pdf.fill_rectangle [x1 + 1, y1 - 1], 17, cell_header_height - 2
-      if date.sunday?
+      if date.sunday? or PhotoCalendar::Application.config.holidays[date.month][date.day]
         pdf.fill_color "cc0000"
       else
         pdf.fill_color "000000"
