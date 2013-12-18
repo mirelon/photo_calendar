@@ -37,9 +37,9 @@ class Calendar < ActiveRecord::Base
     (start_date .. end_date).each do |date|
       if date.day == 1
         pdf.text_box I18n.t('date.month_names', locale: :sk)[date.month],
-          at: [page_width/2-cell_width/2, 550],
+          at: [0, 570],
           width: cell_width,
-          align: :center
+          size: 24
         (0..6).each do |weekday|
           pdf.draw_text I18n.t('date.day_names', locale: :sk)[(weekday + 1) % 7], at: [weekday * cell_width, 515] 
         end
