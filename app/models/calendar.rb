@@ -36,12 +36,12 @@ class Calendar < ActiveRecord::Base
     end_date = start_date.end_of_year
     (start_date .. end_date).each do |date|
       if date.day == 1
-        pdf.text_box Date::MONTHNAMES[date.month],
+        pdf.text_box I18n.t('date.month_names', locale: :sk)[date.month],
           at: [page_width/2-cell_width/2, 550],
           width: cell_width,
           align: :center
         (0..6).each do |weekday|
-          pdf.draw_text Date::DAYNAMES[(weekday + 1) % 7], at: [weekday * cell_width, 515] 
+          pdf.draw_text I18n.t('date.day_names', locale: :sk)[(weekday + 1) % 7], at: [weekday * cell_width, 515] 
         end
       end
       x1 = (date.wday - date.previous_monday.wday)%7 * cell_width

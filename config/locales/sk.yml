@@ -1,0 +1,16 @@
+# encoding: UTF-8
+
+sk:
+  date:
+    formats:
+      # Use the strftime parameters for formats.
+      # When no format has been given, it uses default.
+      # You can provide other formats here if you like!
+      default: "%Y-%m-%d"
+      short: "%b %d"
+      long: "%B %d, %Y"
+
+    day_names: [Nedeľa, Pondelok, Utorok, Streda, Štvrtok, Piatok, Sobota]
+
+    # Don't forget the nil at the beginning; there's no such thing as a 0th month
+    month_names: [~, Január, Február, Marec, Apríl, Máj, Jún, Júl, August, September, Október, November, December]
