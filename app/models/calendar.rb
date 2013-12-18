@@ -41,7 +41,14 @@ class Calendar < ActiveRecord::Base
           width: cell_width,
           size: 24
         (0..6).each do |weekday|
-          pdf.draw_text I18n.t('date.day_names', locale: :sk)[(weekday + 1) % 7], at: [weekday * cell_width, 515] 
+          if weekday==6
+            pdf.fill_color "cc0000"
+          end
+          pdf.text_box I18n.t('date.day_names', locale: :sk)[(weekday + 1) % 7],
+            at: [weekday * cell_width, 520],
+            width: cell_width,
+            align: :center
+          pdf.fill_color "000000"
         end
       end
       x1 = (date.wday - date.previous_monday.wday)%7 * cell_width
