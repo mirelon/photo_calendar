@@ -28,7 +28,9 @@ class Calendar < ActiveRecord::Base
     subtitle_box_height = 15
 
 
-    pdf = Prawn::Document.new(page_size: page_size, page_layout: :portrait)
+    pdf = Prawn::Document.new page_size: page_size,
+      page_layout: :portrait,
+      background: "public/uploads/#{id}/background.jpg"
     pdf.font "#{Prawn::DATADIR}/fonts/DejaVuSans.ttf"
     page_width = pdf.bounds.width
     page_height = pdf.bounds.height
