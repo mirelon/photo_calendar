@@ -32,18 +32,19 @@ class Calendar < ActiveRecord::Base
     cell_header_height = 20
     subtitle_box_width = cell_width
     subtitle_box_height = 15
-    
+
     start_date = Date.new(year)
     end_date = start_date.end_of_year
     (start_date .. end_date).each do |date|
       if date.day == 1
-        pdf.image "public/uploads/#{id}/1001.jpg",
-          at: [-pdf.page.margins[:left], page_height+pdf.page.margins[:top]+100],
+        month_filename = "10" + date.month.to_s.rjust(2,'0') + ".JPG"
+        pdf.image "public/uploads/#{id}/#{month_filename}",
+          at: [-pdf.page.margins[:left], page_height+pdf.page.margins[:top]+(date.month == 12 ? 0 : 100)],
           width: page_width+pdf.page.margins[:left]+pdf.page.margins[:right]
         pdf.fill_color "cc0000"
-        pdf.text_box I18n.t('date.month_names', locale: :sk)[date.month],
+        pdf.text_box I18n.t('date.month_names', locale: :sk)[date.month] + " #{year}",
           at: [0, 570],
-          width: 2*cell_width,
+          width: 4*cell_width,
           size: 36
         (0..6).each do |weekday|
           if weekday==6
