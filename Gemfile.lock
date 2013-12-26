@@ -1,4 +1,11 @@
 GIT
+  remote: https://github.com/mirelon/holidays
+  revision: 47acf2b275af5cf1ea3b039fcc46019b9b0cc44a
+  branch: patch-1
+  specs:
+    holidays (1.0.5)
+
+GIT
   remote: https://github.com/prawnpdf/prawn
   revision: 975046ee6adfabfc16188abdef4b5a21a9423ce9
   specs:
@@ -133,6 +140,7 @@ PLATFORMS
 DEPENDENCIES
   coffee-rails (~> 3.2.1)
   haml
+  holidays!
   jquery-rails
   prawn!
   rails (= 3.2.13)

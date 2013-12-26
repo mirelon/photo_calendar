@@ -9,6 +9,7 @@ gem 'sqlite3'
 gem 'haml'
 gem 'prawn', git: "https://github.com/prawnpdf/prawn"
 gem 'week_of_month', git: "https://github.com/sachin87/week-of-month"
+gem 'holidays', git: "https://github.com/mirelon/holidays", branch: "patch-1"
 
 
 # Gems used only for assets and not required
