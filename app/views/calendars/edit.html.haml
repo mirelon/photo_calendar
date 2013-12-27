@@ -1,0 +1,19 @@
+- if @year
+  Page width (include margins):
+  %input#page_width{value: 841.89, size: 8}
+  %br
+  Page height:
+  %input#page_height{value: 1118.55, size: 8}
+  %br
+  Cell height:
+  %input#cell_height{value: 100, size: 6}
+  %br
+  %ul
+    - (1..12).each do |m|
+      %li{id: "month-#{m}"}
+        = I18n.t('date.month_names', locale: :sk)[m] + ": "
+        %input.width{size: 4, value: @sizes[m][0]}
+        x
+        %input.height{size: 4, value: @sizes[m][1]}
+        %input.lines{type: :hidden, value: @lines[m]}
+        %span.result
