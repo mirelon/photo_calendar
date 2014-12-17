@@ -7,7 +7,7 @@ gem 'rails', '3.2.13'
 
 gem 'sqlite3'
 gem 'haml'
-gem 'prawn', git: "https://github.com/prawnpdf/prawn"
+gem 'prawn', git: "https://github.com/mirelon/prawn.git", branch: "patch-1"
 gem 'week_of_month', git: "https://github.com/sachin87/week-of-month"
 gem 'holidays', git: "https://github.com/mirelon/holidays", branch: "patch-1"
 gem 'fastimage'
