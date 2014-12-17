@@ -1,5 +1,5 @@
 class Calendar < ActiveRecord::Base
-  attr_accessible :name, :single_photo
+  attr_accessible :name, :single_photo, :full_height_grid
   has_many :people
 
   def load_people
@@ -28,7 +28,7 @@ class Calendar < ActiveRecord::Base
     page_width = pdf.bounds.width
     page_height = pdf.bounds.height
     cell_width = pdf.bounds.width / 7
-    cell_height = 100
+    cell_height = full_height_grid ? 170 : 100
     cell_header_height = 20
     subtitle_box_width = cell_width
     subtitle_box_height = 15
@@ -38,14 +38,20 @@ class Calendar < ActiveRecord::Base
     (start_date .. end_date).each do |date|
       if date.day == 1
         top_grid_y = (date.all_sundays_in_month.size + 1) * cell_height
-        month_filename = "10" + date.month.to_s.rjust(2,'0') + ".JPG"
-        pdf.image "public/uploads/#{id}/#{month_filename}",
-          height: page_height - top_grid_y - 80,
-          position: :center
+        if not full_height_grid
+          month_filename = "10" + date.month.to_s.rjust(2,'0') + ".JPG"
+          pdf.image "public/uploads/#{id}/#{month_filename}",
+            height: page_height - top_grid_y - 80,
+            position: :center
+        end
         pdf.fill_color "cc0000"
-        pdf.text_box I18n.t('date.month_names', locale: :sk)[date.month] + " #{year}",
-          at: [0, top_grid_y + 70],
+        month_label = I18n.t('date.month_names', locale: :sk)[date.month]
+        month_label = "#{month_label.mb_chars.upcase.to_s}    " if full_height_grid
+        month_label_y = if full_height_grid then (page_height + top_grid_y + 70)/2 else top_grid_y + 70 end
+        pdf.text_box "#{month_label} #{year}",
+          at: [0, month_label_y],
           width: 7*cell_width,
+          align: full_height_grid ? :center : :left,
           size: 36
         (0..6).each do |weekday|
           if weekday==6
