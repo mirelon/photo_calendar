@@ -1,5 +1,5 @@
 class Calendar < ActiveRecord::Base
-  attr_accessible :name
+  attr_accessible :name, :single_photo
   has_many :people
 
   def load_people
@@ -102,6 +102,7 @@ class Calendar < ActiveRecord::Base
             pdf.image person.photo,
                 at: [x1+1, y1 - cell_header_height-1],
                 fit: [cell_width, cell_height-cell_header_height-2]
+            break if single_photo
           else
             pdf.bounding_box([x1+1, y1 - cell_header_height-1], width: cell_width-1, height: cell_height-cell_header_height-1) do
               pdf.image person.photo,
@@ -121,7 +122,7 @@ class Calendar < ActiveRecord::Base
           at: [x1 + 2, y1 - cell_height + 15],
           width: subtitle_box_width,
           height: subtitle_box_height,
-          align: :left,
+          align: single_photo ? :center : :left,
           valign: :center,
           size: 10
         if found_people.size == 2
@@ -135,8 +136,7 @@ class Calendar < ActiveRecord::Base
         end
         pdf.fill_color "000000"
       end
-
-
+      
       if date.tomorrow.day == 1 and not date.tomorrow.january?
         pdf.start_new_page
       end
