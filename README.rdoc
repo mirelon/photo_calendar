@@ -7,10 +7,10 @@ where:
 * `single_photo` decides if there can be two photos in one day beside each other.
 * `full_height_grid` decides if the photos are portrait or landscape.
  * If true, they are portrait and you are done.
- * If false, they are landscape, so the month grid takes space for only half the page. THe remaining space will be filled with background images 1001.jpg .. 1012.jpg.
+ * If false, they are landscape, so the month grid takes space for only half the page. THe remaining space will be filled with background images 1001.JPG .. 1012.JPG.
 
 In addition, you need to provide background.jpg as a background for each page.
 
 Visit http://localhost:3000/calendars/{id}?reload=1
 
-The parameter reload loads all pictures in public/uploads/{id} and associates them as People of the Calendar. For rendering modifications you can remove the parameter to speed up rendering. For photo changes you need to set reload=1. 
+The parameter reload loads all pictures in public/uploads/{id} and associates them as People of the Calendar. For rendering modifications / changes in individual photos you can remove the parameter to speed up rendering. For changes in set of people you need to set reload=1. 
