@@ -107,7 +107,7 @@ class Calendar < ActiveRecord::Base
           if found_people.size == 1
             pdf.image person.photo,
                 at: [single_photo ? (x1+x1+cell_width)/2 : x1+1, y1 - cell_header_height-1],
-                fit: [cell_width, cell_height-cell_header_height-2],
+                fit: [cell_width-2, cell_height-cell_header_height-2],
                 position: single_photo ? :center : :left
             break if single_photo
           else
