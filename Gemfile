@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.13'
+gem 'rails', '3.2.22.5'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -9,7 +9,7 @@ gem 'sqlite3'
 gem 'haml'
 gem 'prawn', git: "https://github.com/mirelon/prawn.git", branch: "patch-1"
 gem 'week_of_month', git: "https://github.com/sachin87/week-of-month"
-gem 'holidays', git: "https://github.com/mirelon/holidays", branch: "patch-1"
+gem 'holidays', git: "https://github.com/holidays/holidays"
 gem 'fastimage'
 
 
