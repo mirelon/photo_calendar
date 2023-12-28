@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.22.5'
+gem 'rails', '~> 4.0'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -11,21 +11,34 @@ gem 'prawn', git: "https://github.com/mirelon/prawn.git", branch: "patch-1"
 gem 'week_of_month', git: "https://github.com/sachin87/week-of-month"
 gem 'holidays', git: "https://github.com/holidays/holidays"
 gem 'fastimage'
+gem 'json', '2.0.0' # https://github.com/oneclick/rubyinstaller2/issues/62
 
 
-# Gems used only for assets and not required
-# in production environments by default.
-group :assets do
-  gem 'sass-rails',   '~> 3.2.3'
-  gem 'coffee-rails', '~> 3.2.1'
+gem 'sass-rails', '~> 4.0'
+gem 'coffee-rails', '~> 4.0'
 
-  # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-  # gem 'therubyracer', :platforms => :ruby
+# See https://github.com/sstephenson/execjs#readme for more supported runtimes
+# gem 'therubyracer', :platforms => :ruby
 
-  gem 'uglifier', '>= 1.0.3'
-end
+gem 'uglifier'
 
-gem 'jquery-rails'
+gem 'jquery-rails', '~> 4.0'
+gem 'did_you_mean'
+gem 'etc'
+gem 'fileutils'
+gem 'delegate'
+gem 'uri'
+gem 'zlib'
+gem 'stringio'
+gem 'ipaddr'
+gem 'openssl'
+gem 'cgi'
+gem 'strscan'
+gem 'forwardable'
+gem 'bigdecimal', '1.4.2'
+
+# For smooth upgrade 3.1 -> 4.0
+gem 'protected_attributes'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

@@ -13,4 +13,12 @@ In addition, you need to provide background.jpg as a background for each page.
 
 Visit http://localhost:3000/calendars/{id}?reload=1
 
-The parameter reload loads all pictures in public/uploads/{id} and associates them as People of the Calendar. For rendering modifications / changes in individual photos you can remove the parameter to speed up rendering. For changes in set of people you need to set reload=1. 
+The parameter reload loads all pictures in public/uploads/{id} and associates them as People of the Calendar. For rendering modifications / changes in individual photos you can remove the parameter to speed up rendering. For changes in set of people you need to set reload=1.
+
+Issues with Ubuntu 22.04:
+SSL requires ruby >= 2.7, so upgrade 2.1 -> 2.7 is needed
+Then https://github.com/oneclick/rubyinstaller2/issues/62
+ruby 2.7 requires json 2.0
+But rdoc < 4.3 requires json 1.8. Need to upgrade rdoc to >= 4.3. Need to upgrade railties to 4.*
+> net-imap requires Ruby version >= 2.7.3. The current ruby version is 2.7.2.137.
+upgrading to 2.7.3
